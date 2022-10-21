@@ -1,3 +1,10 @@
+//-----------------------------------------
+// NAME: Manuel Espinoza 
+// STUDENT NUMBER: 7946366
+//
+// COURSE: COMP 2140, SECTION: B07
+//-----------------------------------------
+
 import java.util.*;
 
 public class EvalPostfix {
@@ -46,20 +53,28 @@ public class EvalPostfix {
     Stack operands = new Stack();
     int result = 0;
 
+    // look through the whole string
     for (int i = 0; i < expression.length(); i++) {
       String nextOperand = "" + expression.charAt(i);
       int digit;
+
+      // try will only work if nextOperand is a digit
       try {
         digit = Integer.parseInt(nextOperand);
         operands.push(digit);
-
-      } catch (NumberFormatException nfe) {
+      }
+      // If the nextOperand is not a digit
+      catch (NumberFormatException nfe) {
         int A;
         int B;
         char c = nextOperand.charAt(0);
+
+        // ignore spaces
         if (c != ' ') {
           B = operands.pop();
           A = operands.pop();
+
+          // Process each operator separately
           if (c == '+') {
             result = A + B;
           } else if (c == '-') {
@@ -69,6 +84,8 @@ public class EvalPostfix {
           } else if (c == '/') {
             result = A / B;
           }
+
+          // push the result
           operands.push(result);
         }
       }
